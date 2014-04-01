@@ -1,4 +1,5 @@
 R E F R A X
+===========
 
 Refrax is a game for 1 to 4 players. The goal is simple: clear each level of the
 orbs scattered about hither and thither by the evil Dr. Nasty, or live with the
@@ -32,6 +33,7 @@ Have fun, and don't forget to email hutch@tmbg.org to let us know what you think
 of our creation. Viva la refraxion!
 
 CREDITS
+-------
 
 Refrax was written by Jason Hutchens, with Philip Dunstan. It was inspired by
 the mini-game to be found in the pause mode of Jeff Minter's Iridis Alpha, an
@@ -51,6 +53,7 @@ All but one of the sound effects were sourced from various web sites. All of
 them are license free. The remaining sound effect was recorded by us.
 
 USAGE
+-----
 
 * `brew install sdl`
 * `make`
