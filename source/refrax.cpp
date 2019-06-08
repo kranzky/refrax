@@ -1,3 +1,5 @@
+#include "emscripten.h"
+
 #include <input.h>
 #include <photon.h>
 #include <grid.h>
@@ -88,6 +90,80 @@ void clearGrid();
 
 bool verifyScore(int offset=0);
 
+struct context
+{
+  SDL_Surface *surface;
+  Uint32 now;
+  Uint32 then;
+};
+context ctx;
+
+void mainloop(void)
+{
+    input.clear();
+    input.poll();
+    if (input.key(Input::QUIT) && mode != PAUSE && mode != HIGHSCORE)
+    {
+        if (mode == ATTRACT)
+        {
+            mode = QUIT;
+        }
+        else
+        {
+            mode = HIGHSCORE;
+        }
+        initMode();
+    }
+    if (input.key(Input::PAUSE))
+    {
+        if (mode == PLAY)
+        {
+            scrolltext.print("*** PAUSED ***", false);
+            audio->pause(); 
+            mode = PAUSE;
+        }
+        else if (mode == PAUSE)
+        {
+            scrolltext.clear();
+            audio->pause(); 
+            mode = PLAY;
+        }
+    }
+    if (input.key(Input::WINDOW))
+    {
+        SDL_WM_ToggleFullScreen(ctx.surface);
+    }
+    if (input.key(Input::AUDIO))
+    {
+        audio->mute();
+    }
+    if (input.key(Input::LEVEL) && mode == PLAY)
+    {
+        mode = LEVEL;
+        skip = true;
+        initMode();
+    }
+    if (input.key(Input::CHEAT) && mode == PLAY)
+    {
+        audio->playSound(Audio::CHEAT);
+        notime = !notime;
+        if(notime) audio->stopSound(Audio::HURRY);
+    }
+    if (input.key(Input::START) && mode == ATTRACT)
+    {
+        mode = PLAY;
+        initMode();
+        input.clear();
+    }
+    updateMode();
+    drawMode(ctx.surface);
+ctx.now = SDL_GetTicks();
+    int delay = 72 - static_cast<int>(ctx.now - ctx.then);
+    if (delay > 0) SDL_Delay(delay);
+ctx.then = ctx.now;
+    SDL_Flip(ctx.surface);
+}
+
 //------------------------------------------------------------------------------
 int
 main(int argc, char** argv)
@@ -155,72 +231,10 @@ main(int argc, char** argv)
     Uint32 now  = SDL_GetTicks();
 	Uint32 then = now;
 
-    do
-    {
-        input.clear();
-        input.poll();
-        if (input.key(Input::QUIT) && mode != PAUSE && mode != HIGHSCORE)
-        {
-            if (mode == ATTRACT)
-            {
-                mode = QUIT;
-            }
-            else
-            {
-                mode = HIGHSCORE;
-            }
-            initMode();
-        }
-        if (input.key(Input::PAUSE))
-        {
-            if (mode == PLAY)
-            {
-                scrolltext.print("*** PAUSED ***", false);
-                audio->pause(); 
-                mode = PAUSE;
-            }
-            else if (mode == PAUSE)
-            {
-                scrolltext.clear();
-                audio->pause(); 
-                mode = PLAY;
-            }
-        }
-        if (input.key(Input::WINDOW))
-        {
-            SDL_WM_ToggleFullScreen(surface);
-        }
-        if (input.key(Input::AUDIO))
-        {
-            audio->mute();
-        }
-        if (input.key(Input::LEVEL) && mode == PLAY)
-        {
-            mode = LEVEL;
-            skip = true;
-            initMode();
-        }
-        if (input.key(Input::CHEAT) && mode == PLAY)
-        {
-            audio->playSound(Audio::CHEAT);
-            notime = !notime;
-            if(notime) audio->stopSound(Audio::HURRY);
-        }
-        if (input.key(Input::START) && mode == ATTRACT)
-        {
-            mode = PLAY;
-            initMode();
-            input.clear();
-        }
-        updateMode();
-        drawMode(surface);
-		now = SDL_GetTicks();
-        int delay = 72 - static_cast<int>(now - then);
-        if (delay > 0) SDL_Delay(delay);
-		then = now;
-        SDL_Flip(surface);
-    }
-    while (mode != QUIT);
+    ctx.surface = surface;
+    ctx.now = now;
+    ctx.then = then;
+    emscripten_set_main_loop(mainloop, 0, 1);
 
     delete audio;
     delete font;

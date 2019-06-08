@@ -58,7 +58,7 @@ Audio::~Audio()
 void
 Audio::playMusic(Audio::Music music)
 {
-    Mix_FadeInMusic(_music[music], -1, 200);
+    //Mix_FadeInMusic(_music[music], -1, 200);
 }
 
 //------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ Audio::musicVolume(int volume)
 void
 Audio::stopMusic()
 {
-    Mix_FadeOutMusic(200);
+    //Mix_FadeOutMusic(200);
 }
 
 //------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 # vim: noet
-CPP	:= g++ -Wall -O3 -Iinclude -I/usr/local/include/SDL
-LINK	:= -lSDL -lSDL_mixer -lpthread -lSDLmain -framework Cocoa
+CPP	:= em++ -Wall -Iinclude --use-preload-plugins
+DEF := -s WASM=1
 
 TARGETS	:= bin/refrax
 SOURCES	:= $(filter-out $(TARGETS:bin/%=source/%.cpp),$(wildcard source/*.cpp))
@@ -15,8 +15,8 @@ clean:
 
 object/%.o: source/%.cpp ${HEADERS}
 	@echo "Compiling $<"
-	@${CPP} -c $< -o $@
+	${CPP} -c $< ${DEF} -o $@
 
 bin/%: object/%.o ${OBJECTS}
 	@echo "Linking $@"
-	${CPP} -o $@ ${OBJECTS} $< ${LINK}
+	${CPP} ${OBJECTS} $< ${DEF} -o $@.html --preload-file resource

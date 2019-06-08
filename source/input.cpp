@@ -37,7 +37,7 @@ Input::poll()
             if (event.type == SDL_KEYDOWN)
             {
                 _symbol   = event.key.keysym.sym;
-                _modifier = event.key.keysym.mod;
+                _modifier = static_cast<SDLMod>(event.key.keysym.mod);
             }
             switch (event.key.keysym.sym)
             {
