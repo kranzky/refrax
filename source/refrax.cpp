@@ -124,7 +124,7 @@ main(int argc, char** argv)
     SDL_PixelFormat* pixel_format = video_info->vfmt;
 
     SDL_Surface* surface = SDL_SetVideoMode(640,480,pixel_format->BitsPerPixel,
-                                            SDL_FULLSCREEN |
+                                            //SDL_FULLSCREEN |
                                             SDL_SWSURFACE |
                                             SDL_HWPALETTE);
 
@@ -554,7 +554,7 @@ updateMode()
             {
                 showhigh = true;
                 highscore->print(symbol, *font);
-           font->print(symbol, "      email hutch at tmbg dot org      ", 0,23);
+           font->print(symbol, "    email: lloyd at kranzky dot com    ", 0,23);
            font->print(symbol, "       Inspired by YAK's Deflex!       ", 0,26);
             }
             else if (count == 396)

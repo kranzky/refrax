@@ -29,8 +29,8 @@ There are a few more keys to know about. F1 pauses the game. F2 mutes the sound.
 F3 toggles between a full-screen and a windowed display. Escape exits the
 current screen, which will exit the game from the title screen.
 
-Have fun, and don't forget to email hutch@tmbg.org to let us know what you think
-of our creation. Viva la refraxion!
+Have fun, and don't forget to email lloyd@kranzky.com to let us know what you
+think of our creation. Viva la refraxion!
 
 CREDITS
 -------
