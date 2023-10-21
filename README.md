@@ -58,3 +58,8 @@ USAGE
 * `brew install sdl`
 * `make`
 * `./bin/refrax`
+
+SHIP
+----
+
+butler push refrax_distro kranzky/refrax:mac --userversion 1.0.0
