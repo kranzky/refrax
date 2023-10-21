@@ -80,7 +80,14 @@ Player::update(Input& input,Grid<Uint8>& symbol,Font& font, Audio* audio)
 {
     if(input.key(_slash_key))
     {
-        _turned = _slash(symbol,font);
+        if(_trail.getHeading()==Trail::N || _trail.getHeading()==Trail::S)
+        {
+          _turned = _slash(symbol,font);
+        }
+        else
+        {
+          _turned = _back(symbol,font);
+        }
         if (!_turned)
         {
             _buffer = _slash_key;
@@ -88,7 +95,14 @@ Player::update(Input& input,Grid<Uint8>& symbol,Font& font, Audio* audio)
     }
     else if(input.key(_back_key))
     {
-        _turned = _back(symbol,font);
+        if(_trail.getHeading()==Trail::N || _trail.getHeading()==Trail::S)
+        {
+          _turned = _back(symbol,font);
+        }
+        else
+        {
+          _turned = _slash(symbol,font);
+        }
         if (!_turned)
         {
             _buffer = _back_key;

@@ -124,7 +124,7 @@ main(int argc, char** argv)
     SDL_PixelFormat* pixel_format = video_info->vfmt;
 
     SDL_Surface* surface = SDL_SetVideoMode(640,480,pixel_format->BitsPerPixel,
-                                            //SDL_FULLSCREEN |
+                                            SDL_FULLSCREEN |
                                             SDL_SWSURFACE |
                                             SDL_HWPALETTE);
 
@@ -583,7 +583,7 @@ updateMode()
                 initMode();
                 break;
             }
-            else if (timer == (TIME*64)/100 && !notime)
+            else if (timer == (TIME*23)/100 && !notime)
             {
                 audio->playSound(Audio::HURRY);
             }

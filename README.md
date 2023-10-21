@@ -11,9 +11,10 @@ can guide one each, one dextrous player can guide all four, or any other
 possible combination of human beings and light beams that you can imagine.
 
 Each light beam is deflected by placing a mirror in front of it. There are two
-kinds of mirror: \ and /. Place these down by hitting the corresponding key. The
-red beam is controlled with the Q and W keys, the green beam with the X and C
-keys, the blue beam with N and M and the grey beam with O and P.
+kinds of mirror: \ and /. Place these down by hitting the corresponding key in
+the direction that you want to turn uour light beam. The red beam is controlled
+with the Q and W keys, the green beam with the Z and X keys, the blue beam with
+N and M and the grey beam with O and P.
 
 The more orbs defused by a beam, the faster it will travel.
 

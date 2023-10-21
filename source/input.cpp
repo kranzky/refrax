@@ -81,12 +81,12 @@ Input::poll()
                     _bit(&event,SLASH1);
                     break;
                 }
-                case SDLK_x:
+                case SDLK_z:
                 {
                     _bit(&event,BACK2);
                     break;
                 }
-                case SDLK_c:
+                case SDLK_x:
                 {
                     _bit(&event,SLASH2);
                     break;
